@@ -1,8 +1,8 @@
 <?php
 /*
-  Plugin Name: ImageURL
-  Plugin URI: http://github.com/hirocaster
-  Description: ImageURL
+  Plugin Name: Url Thumbnail Link
+  Plugin URI: http://github.com/hirocaster/url_thumbnail_link
+  Description: Make Thumbnail URL and Link HTML
   Version: 0.0.1
   Author: Hiroki OHTSUKA
   Author URI: http://hiroki.jp/
@@ -19,7 +19,7 @@ function url_thumbnail_link($atts){
                                'description' => null,
                                ), $atts));
 
-  $dir_path = get_option('upload_path') . '/imageurl/';
+  $dir_path = get_option('upload_path') . '/url_thumbnail_link/';
   if(!file_exists($dir_path)){
       mkdir($dir_path);
   }
