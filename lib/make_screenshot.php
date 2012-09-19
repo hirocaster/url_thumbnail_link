@@ -1,11 +1,8 @@
 <?php
 
 /* $url = 'http://b.hatena.ne.jp/'; */
-/* $url = 'http://b.hatena.ne.jp/hotentry/it'; */
-/* $url = 'http://b.hatena.ne.jp/hotentry/it/'; */
-/* $url = 'http://b.hatena.ne.jp/search/tag?q=hiroki.jp'; */
 /* $url = 'http://b.hatena.ne.jp/search/tag?sort=popular&q=hiroki.jp'; */
-/* //$url = 'http://yahoo.co.jp/'; */
+/* $url = 'http://jp.rs-online.com/web/generalDisplay.html?id=raspberrypi'; */
 
 /* $dir_path = '/tmp/'; */
 

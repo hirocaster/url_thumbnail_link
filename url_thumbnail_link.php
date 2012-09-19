@@ -19,14 +19,15 @@ function url_thumbnail_link($atts){
                                'description' => null,
                                ), $atts));
 
-  $dir_path = get_option('upload_path') . '/url_thumbnail_link/';
+  $upload_info = wp_upload_dir();
+  $dir_path = $upload_info['path'] . '/url_thumbnail_link/';
   if(!file_exists($dir_path)){
       mkdir($dir_path);
   }
   
   $filename = make_screenshot($url, $dir_path);
   $resize_filename = resize_image($filename, $width, $height, $dir_path);
-  $image_src = $dir_path . $resize_filename;
+  $image_src = $upload_info['url'] . '/url_thumbnail_link/' . $resize_filename;
 
   $title = get_title($url);
   
