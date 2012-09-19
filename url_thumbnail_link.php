@@ -29,7 +29,9 @@ function url_thumbnail_link($atts){
   $resize_filename = resize_image($filename, $width, $height, $dir_path);
   $image_src = $upload_info['url'] . '/url_thumbnail_link/' . $resize_filename;
 
-  $title = get_title($url);
+  if(is_null($title)){
+      $title = get_title($url);
+  }
   
   return "<div style='width: 80%; margin-left: auto; margin-right: auto;'><a href='$url' target='_blank'><img class='alignleft' align='left' border='0' src='$image_src' alt='$title' width='$width' height='$height' /></a><p><a href='$url' target='_blank'>$title</a><img src='http://b.hatena.ne.jp/entry/image/$url' alt='bookmark_counts' /></p><p><small>$description</small></p><br style='clear:both;' /></div>";
 
