@@ -10,7 +10,7 @@
 
 require_once(dirname(__FILE__) . '/lib/make_screenshot.php');
 
-function imageurl($atts){
+function url_thumbnail_link($atts){
   extract(shortcode_atts(array(
                                'url'         => null,
                                'width'       => 240,
@@ -34,7 +34,7 @@ function imageurl($atts){
 
 }
 
-add_shortcode('imageurl', 'imageurl');
+add_shortcode('url_thumbnail_link', 'url_thumbnail_link');
 
 function get_title($url)
 {
