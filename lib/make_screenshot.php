@@ -5,7 +5,7 @@
 /* $url = 'http://b.hatena.ne.jp/hotentry/it/'; */
 /* $url = 'http://b.hatena.ne.jp/search/tag?q=hiroki.jp'; */
 /* $url = 'http://b.hatena.ne.jp/search/tag?sort=popular&q=hiroki.jp'; */
-/* $url = 'http://yahoo.co.jp/'; */
+/* //$url = 'http://yahoo.co.jp/'; */
 
 /* $dir_path = '/tmp/'; */
 
@@ -69,12 +69,20 @@ function formating_filename($url)
   $patterns[1] = '/^http:\/\//';
   $patterns[2] = '/\/$/';
   $patterns[3] = '/\/+/';
+  $patterns[4] = '/\?+/';
+  $patterns[5] = '/\&+/';
+  $patterns[6] = '/\=+/';
+  $patterns[7] = '/#038;/';
 
   $replacements = array();
   $replacements[0] = '';
   $replacements[1] = '';
   $replacements[2] = '';
-  $replacements[3] = '_';    
+  $replacements[3] = '_';
+  $replacements[4] = '_';
+  $replacements[5] = '_';
+  $replacements[6] = '_';
+  $replacements[7] = '';
   
   return preg_replace($patterns, $replacements, $url) . '.jpg';  
 }
@@ -82,5 +90,5 @@ function formating_filename($url)
 
 function screenshot($url, $file)
 {
-  exec('../bin/wkhtmltoimage-amd64 --width 1024 --height 768 \''.$url . '\' \''. $file . '\' > /dev/null  ');
+  exec(dirname(__FILE__) . '/wkhtmltoimage-amd64 --width 1024 --height 768 \''.$url . '\' \''. $file . '\' > /dev/null');
 }
