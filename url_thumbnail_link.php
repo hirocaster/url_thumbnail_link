@@ -10,6 +10,18 @@
 
 require_once(dirname(__FILE__) . '/lib/make_screenshot.php');
 
+function default_tag(){
+  $html = <<<EOS
+<div style="width: 80%; margin-left: auto; margin-right: auto;">
+<a href="<?php echo \$url ?>" target="_blank">
+<img class="alignleft" align="left" border="0" src="<?php echo \$image_src ?>" alt="<?php echo \$title ?>" width="<?php echo \$width ?>" height="<?php echo \$height ?>" /></a>
+<p><a href="<?php echo \$url ?>" target="_blank"><?php echo \$title ?></a><img src="http://b.hatena.ne.jp/entry/image/<?php echo \$url ?>" alt="bookmark_counts" /></p><p><small><?php echo \$description ?></small></p>
+<br style="clear:both;" />
+</div>
+EOS;
+  return $html;
+}
+
 function url_thumbnail_link($atts){
   extract(shortcode_atts(array(
                                'url'         => null,
@@ -29,23 +41,36 @@ function url_thumbnail_link($atts){
   $resize_filename = resize_image($filename, $width, $height, $dir_path);
   $image_src = $upload_info['url'] . '/url_thumbnail_link/' . $resize_filename;
 
-  $title = get_title($url);
+  if(is_null($title)){
+    $title = get_title($url);
+  }
+
+  $html = "";
   
+  if(!get_option('url_thumbnail_link_tag')){
+    $html = default_tag();
+  }else{
+    $html = get_option('url_thumbnail_link_tag');
+  }
 
+  $fail = false;
 
-  if(!get_option('url_thumbnail_link_tag'))
-    {
-  return "<div style='width: 80%; margin-left: auto; margin-right: auto;'><a href='$url' target='_blank'><img class='alignleft' align='left' border='0' src='$image_src' alt='$title' width='$width' height='$height' /></a><p><a href='$url' target='_blank'>$title</a><img src='http://b.hatena.ne.jp/entry/image/$url' alt='bookmark_counts' /></p><p><small>$description</small></p><br style='clear:both;' /></div>";
-    }
-  else
-    {
-      return eval(get_option('url_thumbnail_link_tag'));
-    }
+  ob_start();
+  if(eval('?>'. $html) === false){
+    $fail = true;
+  }
+  $evaluatedHtml = ob_get_clean();
+
+  if($fail){
+    throw new RuntimeException(sprintf("Evaluation failed: %s", $html));
+  }else{
+    return $evaluatedHtml;
+  }
 }
 
 add_shortcode('url_thumbnail_link', 'url_thumbnail_link');
 
-add_action('admin_menu', 'url_thumbnail_link_confg');
+add_action('admin_menu', 'url_thumbnail_link_config');
 
 function url_thumbnail_link_config(){
   add_options_page('url_thumbnail_link', 'url_thumbnail_link', 8, __FILE__, 'url_thumbnail_link_config_page');
@@ -60,8 +85,15 @@ function url_thumbnail_link_config_page(){
     <form method="post" action="options.php">
     <?php wp_nonce_field('update-options'); ?>
 
-    <!--INPUT文のNAME属性を前述の変数と合わせます。-->
-    <input type="text" name="url_thumbnail_link_tag" value="<?php echo get_option('url_thumbnail_link_tag'); ?>" />
+<!--INPUT文のNAME属性を前述の変数と合わせます。-->
+<textarea name="url_thumbnail_link_tag" rows="4" cols="80">
+<?php
+    if(get_option('url_thumbnail_link_tag', false)){
+      echo get_option('url_thumbnail_link_tag');
+    }else{
+      echo default_tag();
+    }?>
+</textarea>
 
     <!--ここのhiddenも必ず入れてください。複数あるときは、page_optionsは半角カンマで区切って記述。a,b,c　など-->
     <input type="hidden" name="action" value="update" />
@@ -72,15 +104,13 @@ function url_thumbnail_link_config_page(){
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
     </p>
     </form>
+    <p>empty is default template</p>
     </div>
 
   <?php
 }
 
-
-
-function get_title($url)
-{
+function get_title($url){
   $json_full_path = get_option('upload_path') . '/imageurl/title.json';
 
   if (file_exists($json_full_path)){
@@ -99,9 +129,7 @@ function get_title($url)
   return $title;
 }
 
-
-function fetch_title($url)
-{
+function fetch_title($url){
   $file = fopen ($url, "r");
   if (!$file){
     $title = 'Can\'t get title.';
@@ -117,4 +145,3 @@ function fetch_title($url)
   fclose($file);
   return $title;
 }
-
