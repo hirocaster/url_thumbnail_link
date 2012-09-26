@@ -14,9 +14,13 @@ function default_tag(){
   $html = <<<EOS
 <div style="width: 80%; margin-left: auto; margin-right: auto;">
 <a href="<?php echo \$url ?>" target="_blank">
-<img class="alignleft" align="left" border="0" src="<?php echo \$image_src ?>" alt="<?php echo \$title ?>" width="<?php echo \$width ?>" height="<?php echo \$height ?>" /></a>
-<p><a href="<?php echo \$url ?>" target="_blank"><?php echo \$title ?></a><img src="http://b.hatena.ne.jp/entry/image/<?php echo \$url ?>" alt="bookmark_counts" /></p><p><small><?php echo \$description ?></small></p>
-<br style="clear:both;" />
+  ▶ <?php echo \$title ?>
+</a>
+<img src="http://b.hatena.ne.jp/entry/image/<?php echo \$url ?>" alt="bookmark_counts" />
+<a href="<?php echo \$url ?>" target="_blank">
+  <img border="0" src="<?php echo \$image_src ?>" alt="<?php echo \$title ?>" width="<?php echo \$width ?>" height="<?php echo \$height ?>" style="border: 1px dashed #CCC; padding: 5px; margin-left: auto; margin-right: auto; display: block;" />
+</a>
+<?php echo \$description ?>
 </div>
 EOS;
   return $html;
