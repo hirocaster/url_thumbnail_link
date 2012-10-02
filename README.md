@@ -1,12 +1,14 @@
+# url_thumbnail_link for WordPress Plugin
+
+Auto generate thumbnail link by short code.
+
 # Require
 
     - PHP 5.3.x
-    
-# Depend
-
     - php5-gd
     - php5-curl
-    - only Linux because include linux binaly
+    - wkhtmltoimage(http://code.google.com/p/wkhtmltopdf/)
+    - only Linux(amd64) because include linux binaly
 
 # for Developper
 
@@ -18,4 +20,4 @@
     
 ## UnitTest
 
-        $ ./phpunit
+    $ ./phpuni
