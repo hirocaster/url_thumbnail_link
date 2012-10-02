@@ -1,14 +1,5 @@
 <?php
 
-/* $url = 'http://b.hatena.ne.jp/'; */
-/* $url = 'http://b.hatena.ne.jp/search/tag?sort=popular&q=hiroki.jp'; */
-/* $url = 'http://jp.rs-online.com/web/generalDisplay.html?id=raspberrypi'; */
-
-/* $dir_path = '/tmp/'; */
-
-/* $filename = make_screenshot($url, $dir_path); */
-/* echo resize_image($filename, 240, 180, $dir_path); */
-
 function resize_image($filename, $width=240, $height=180, $dir_path='./')
 {
   $original_full_path = $dir_path . $filename;
