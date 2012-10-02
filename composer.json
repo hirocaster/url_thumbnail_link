@@ -1,0 +1,16 @@
+{
+    "repositories": [
+        {
+            "type": "pear",
+            "url": "http://pear.symfony-project.com"
+        },
+        {
+            "type": "pear",
+            "url": "http://pear.phpunit.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "pear-phpunit/PHPUnit": "*"
+    }
+}
