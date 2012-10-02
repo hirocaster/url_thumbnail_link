@@ -12,18 +12,31 @@ Auto generate thumbnail link by short code.
 
 # Short Code
 
-example short code. auto get title tag.
+example short code. 
+
+## default(auto get title tag)
 
     [url_thumbnail_link url="http://yahoo.co.jp/"]
+
+### sample image
+
+![default](https://raw.github.com/hirocaster/url_thumbnail_link/master/example/images/example_default.png)
     
-manual set title.
+## set title.
 
     [url_thumbnail_link url="http://yahoo.co.jp/" title="ヤフー！ジャパン"]
-    
-set url description.
+
+### sample image
+
+![set_title](https://raw.github.com/hirocaster/url_thumbnail_link/master/example/images/example_set_title.png)
+
+## set url description.
 
     [url_thumbnail_link url="http://yahoo.co.jp/" description="Famous Search Engine in Japan."]
 
+### sample image
+
+![set_title](https://raw.github.com/hirocaster/url_thumbnail_link/master/example/images/example_set_description.png)
 
 # for Developper
 
