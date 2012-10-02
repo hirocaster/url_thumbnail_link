@@ -87,11 +87,12 @@ function url_thumbnail_link_config_page(){
   <div class="wrap">
     <h2>url_thumbnail_link_config</h2>
 
+    <h3>Template</h3>
+
     <form method="post" action="options.php">
     <?php wp_nonce_field('update-options'); ?>
 
-<!--INPUT文のNAME属性を前述の変数と合わせます。-->
-<textarea name="url_thumbnail_link_tag" rows="4" cols="80">
+<textarea name="url_thumbnail_link_tag" rows="20" cols="120">
 <?php
     if(get_option('url_thumbnail_link_tag', false)){
       echo get_option('url_thumbnail_link_tag');
@@ -100,16 +101,13 @@ function url_thumbnail_link_config_page(){
     }?>
 </textarea>
 
-    <!--ここのhiddenも必ず入れてください。複数あるときは、page_optionsは半角カンマで区切って記述。a,b,c　など-->
     <input type="hidden" name="action" value="update" />
     <input type="hidden" name="page_options" value="url_thumbnail_link_tag" />
     <p class="submit">
 
-    <!--SUBMITは英語で表記。_eで翻訳されるんです。便利！-->
     <input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
     </p>
     </form>
-    <p>empty is default template</p>
     </div>
 
   <?php
