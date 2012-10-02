@@ -9,6 +9,7 @@
 */
 
 require_once(dirname(__FILE__) . '/lib/make_screenshot.php');
+require_once(dirname(__FILE__) . '/lib/make_html_tags.php');
 
 function default_tag(){
   $html = <<<EOS
@@ -112,40 +113,4 @@ function url_thumbnail_link_config_page(){
     </div>
 
   <?php
-}
-
-function get_title($url){
-  $json_full_path = get_option('upload_path') . '/imageurl/title.json';
-
-  if (file_exists($json_full_path)){
-      $json = json_decode(file_get_contents($json_full_path), true);
-  }else {
-      $json = array();
-  }
-
-  if(isset($json["$url"])){
-      $title = $json["$url"];
-  }else{
-        $json["$url"] = fetch_title($url);
-        file_put_contents($json_full_path, json_encode($json));
-        $title = $json["$url"];
-  }
-  return $title;
-}
-
-function fetch_title($url){
-  $file = fopen ($url, "r");
-  if (!$file){
-    $title = 'Can\'t get title.';
-  }
-  while (!feof ($file)){
-      $line = fgets ($file, 1024);
-      /* タイトルとタグが同じ行にある場合のみ動作します。 */
-      if (preg_match ("@\<title\>(.*)\</title\>@i", $line, $out)){
-          $title = $out[1];
-          break;
-      }
-  }
-  fclose($file);
-  return $title;
 }
