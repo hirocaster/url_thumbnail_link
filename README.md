@@ -42,9 +42,9 @@ example short code.
 
 ## Setup
 
-    will install library for ./vendor
+will install library for ./vendor
     
-        $ ./composer.phar update
+    $ ./composer.phar update
     
 ## UnitTest
 
